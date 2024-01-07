@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: github-event-source
+spec:
+  service:
+    ports:
+      - name: github-event-source-port
+        port: 12000
+        targetPort: 12000
+  github:
+    github:
+      repositories:
+        - owner: elias-rod
+          names:
+            - argo-poc
+      webhook:
+        endpoint: "/push"
+        port: "12000"
+        method: "POST"
+        url: https://9de0-186-129-176-24.ngrok-free.app
+      events:
+        - "pull_request"
+      apiToken:
+        name: github-access
+        key: token
+      insecure: true
+      active: true
+      contentType: "json"

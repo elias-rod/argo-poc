@@ -1,0 +1,22 @@
+PortForward
+kubectl -n argo-events port-forward $(kubectl -n argo-events get pod -l eventsource-name=github-event-source -o name) 12000:12000 &
+
+Testing URL
+curl -d '{"message":"this is my first webhook"}' -H "Content-Type: application/json" -X POST https://9de0-186-129-176-24.ngrok-free.app
+
+Ngrok
+choco install ngrok
+ngrok config add-authtoken tokenFromDashboard
+ngrok http 12000
+
+Apply
+kubectl apply -n argo-events -f github-event-source.yaml
+
+Delete
+kubectl delete -n argo-events -f github-event-source.yaml
+
+Get pod logs
+kubectl logs --follow $(kubectl -n argo-events get pod -l eventsource-name=github-event-source -o name) -n argo-events
+
+Get all
+kubectl get all -n argo-events
