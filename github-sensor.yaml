@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: github
+  name: github-event-sensor
 spec:
   template:
     serviceAccountName: operate-workflow-sa
   dependencies:
     - name: github-event-source-dependency
       eventSourceName: github-event-source
-      eventName: pull_request
+      eventName: github-event
       filters:
         data:
           - path: headers.X-Github-Event

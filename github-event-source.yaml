@@ -9,7 +9,7 @@ spec:
         port: 12000
         targetPort: 12000
   github:
-    github:
+    github-event:
       repositories:
         - owner: elias-rod
           names:

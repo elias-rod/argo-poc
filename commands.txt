@@ -9,6 +9,9 @@ choco install ngrok
 ngrok config add-authtoken tokenFromDashboard
 ngrok http 12000
 
+Secrets
+kubectl get secrets -n argo-events
+
 Apply
 kubectl apply -n argo-events -f github-event-source.yaml
 
